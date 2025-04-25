@@ -1,3 +1,12 @@
+if (window.ethereum) {
+  window.ethereum.on('accountsChanged', (accounts) => {
+    window.location.reload();
+  });
+  window.ethereum.on('chainChanged', (chainId) => {
+    window.location.reload();
+  });
+}
+
 import { ethers } from "https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.min.js";
 
 // ===== CONFIGURATION ===== //
