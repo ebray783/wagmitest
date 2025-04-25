@@ -1,0 +1,122 @@
+/* Main layout of the page */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+}
+
+/* ===== NFT WIDGET CORE STYLES ===== */
+/* Container to hold all buttons together */
+.button-container {
+  position: absolute; /* Allows you to move the whole group */
+  top: 50px;   /* Change this to move up/down */
+  right: 50px; /* Change this to move left/right */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;   /* Space between buttons */
+  align-items: center;
+}
+
+/* Button Reset (Overrides other CSS) */
+#connect-btn, 
+#mint-btn, 
+#disconnect-btn {
+  all: unset; /* Remove all default styles */
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  width: 200px;   /* Button width */
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Connect/Mint Buttons */
+#connect-btn, 
+#mint-btn {
+  background: linear-gradient(135deg, #4CAF50, #2E7D32); /* Green */
+  color: white;
+}
+
+/* Disconnect Button */
+#disconnect-btn {
+  background: linear-gradient(135deg, #f44336, #c62828); /* Red */
+  color: white;
+}
+
+/* Hover Effects */
+#connect-btn:hover, 
+#mint-btn:hover, 
+#disconnect-btn:hover {
+  transform: translateY(-2px); /* Slight movement on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+/* Disabled State */
+#mint-btn:disabled {
+  background: #555;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Status Box */
+#nft-status {
+  padding: 12px;
+  margin: 15px auto;
+  width: 90%;
+  max-width: 300px;
+  text-align: center;
+  border-radius: 8px;
+  border-left: 4px solid;
+}
+
+/* Status Colors */
+#nft-status.disconnected {
+  background: #311b1b;
+  border-color: #f44336;
+  color: #ff8a80;
+}
+
+#nft-status.connected {
+  background: #1b311b;
+  border-color: #4CAF50;
+  color: #a5d6a7;
+}
+
+#nft-status.processing {
+  background: #1a237e;
+  border-color: #2196F3;
+  color: #90caf9;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+  .nft-widget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .nft-widget button {
+    width: 90vw;
+    max-width: 320px;
+    margin: 8px 0;
+    text-align: center;
+  }
+}
+/* === BUTTON MOVEMENT UTILITIES === */
+.move-right  { transform: translateX(20px) !important; }
+.move-left   { transform: translateX(-20px) !important; }
+.move-up     { transform: translateY(-20px) !important; }
+.move-down   { transform: translateY(20px) !important; }
+
+/* === MOBILE-ONLY BUTTON MOVEMENT === */
+@media (max-width: 900px) {
+  .move-right-mobile  { transform: translateX(20px) !important; }
+  .move-left-mobile   { transform: translateX(-20px) !important; }
+  .move-up-mobile     { transform: translateY(-20px) !important; }
+  .move-down-mobile   { transform: translateY(20px) !important; }
+}
