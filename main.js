@@ -1,4 +1,28 @@
-// ===== CONFIGURATION ===== //
+import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi'
+import { bsc } from 'wagmi/chains'
+import { ethers } from 'ethers'
+
+// WalletConnect Project ID
+const projectId = 'ff2db6544a529027450c74a34fc4fb74'
+
+// Wagmi config
+const metadata = {
+  name: 'My Dapp',
+  description: 'My Dapp Description',
+  url: 'https://ebray783.github.io/wagmitest',
+  icons: ['https://walletconnect.com/walletconnect-logo.png']
+}
+const chains = [bsc]
+const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
+
+// Create Web3Modal
+createWeb3Modal({ wagmiConfig, projectId, chains })
+
+// Add the Web3Modal button to the page
+const connectBtn = document.createElement('w3m-button')
+document.body.appendChild(connectBtn)
+
+// ===== CONTRACT CONFIGURATION ===== //
 const config = {
   mintContract: {
     address: "0x1BEe8d11f11260A4E39627EDfCEB345aAfeb57d9",
@@ -53,46 +77,10 @@ const config = {
   explorerUrl: "https://bscscan.com"
 };
 
-let provider, signer, address, walletProvider;
-let walletAddressEl, connectBtn, disconnectBtn, mintBtn, statusEl;
-
-async function connectWallet() {
-  if (window.ethereum) {
-    provider = new ethers.BrowserProvider(window.ethereum);
-    await provider.send("eth_requestAccounts", []);
-    signer = await provider.getSigner();
-    address = await signer.getAddress();
-  } else if (window.WalletConnectProvider || window.WalletConnectProvider?.default) {
-    walletProvider = new (window.WalletConnectProvider?.default || window.WalletConnectProvider)({
-      rpc: { 56: "https://bsc-dataseed.binance.org/" },
-      chainId: 56
-    });
-    await walletProvider.enable();
-    provider = new ethers.BrowserProvider(walletProvider);
-    signer = await provider.getSigner();
-    address = await signer.getAddress();
-  } else {
-    alert("No wallet found. Please install MetaMask or use WalletConnect.");
-    return;
-  }
-  if (walletAddressEl) walletAddressEl.textContent = `${address.slice(0, 6)}...${address.slice(-4)}`;
-  enableMintButton();
-  connectBtn.style.display = 'none';
-  disconnectBtn.style.display = 'inline-block';
-}
-
-function enableMintButton() {
-  if (mintBtn) mintBtn.disabled = false;
-  updateStatus("🟢 Wallet connected");
-  if (statusEl) statusEl.className = "connected";
-}
-
-function disableMintButton() {
-  if (mintBtn) mintBtn.disabled = true;
-  if (walletAddressEl) walletAddressEl.textContent = "";
-  updateStatus("🔴 Wallet Not Connected");
-  if (statusEl) statusEl.className = "disconnected";
-}
+// ===== MINT BUTTON LOGIC ===== //
+const mintBtn = document.getElementById('mint-btn');
+const statusEl = document.getElementById('nft-status');
+const walletAddressEl = document.getElementById('wallet-address');
 
 function updateStatus(msg, status = "info") {
   if (statusEl) statusEl.textContent = msg;
@@ -107,53 +95,57 @@ function handleError(err) {
   updateStatus("❌ " + (err.message || "Something went wrong"), "error");
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-  walletAddressEl = document.getElementById('wallet-address');
-  connectBtn = document.getElementById('connect-btn');
-  disconnectBtn = document.getElementById('disconnect-btn');
-  mintBtn = document.getElementById('mint-btn');
-  statusEl = document.getElementById('nft-status');
-
-  connectBtn?.addEventListener('click', connectWallet);
-  disconnectBtn?.addEventListener('click', () => {
-    signer = null;
-    address = null;
-    disableMintButton();
-    connectBtn.style.display = 'inline-block';
-    disconnectBtn.style.display = 'none';
-  });
-
-  mintBtn?.addEventListener('click', async () => {
-    if (!signer) {
+// Mint NFT function
+async function mintNFT() {
+  try {
+    mintBtn.disabled = true;
+    updateStatus("⏳ Minting...");
+    // Get the provider and signer from wagmi
+    const { getWalletClient, getAccount } = await import('@wagmi/core')
+    const account = getAccount()
+    if (!account?.address) {
       updateStatus("Connect your wallet first!");
       return;
     }
-    try {
-      mintBtn.disabled = true;
-      updateStatus("⏳ Minting...");
-      const mintContract = new ethers.Contract(config.mintContract.address, config.mintContract.abi, signer);
-      const tx = await mintContract.mintNFT({ value: ethers.parseEther(config.mintContract.mintPrice) });
-      const receipt = await tx.wait();
-      updateStatus(`✅ Minted! TX: ${createExplorerLink(receipt.hash)}`, "success");
-      // Extract tokenId from Transfer event
-      const event = receipt.logs.map(log => {
-        try { return mintContract.interface.parseLog(log); } catch { return null; }
-      }).find(e => e?.name === "Transfer");
-      const tokenId = event?.args?.tokenId || event?.args?.[2];
-      if (!tokenId) throw new Error("Mint event not found");
-      // Auto-wrap
-      const wrapContract = new ethers.Contract(config.wrapContract.address, config.wrapContract.abi, signer);
-      updateStatus("⏳ Wrapping NFT...");
-      const tokenURI = config.wrapContract.defaultTokenURI + "/" + tokenId + ".json";
-      await wrapContract.wrap(tokenId, tokenURI);
-      updateStatus("✅ Wrapped NFT!", "success");
-    } catch (err) {
-      handleError(err);
-    } finally {
-      mintBtn.disabled = false;
-    }
-  });
+    const walletClient = await getWalletClient()
+    const ethersProvider = new ethers.BrowserProvider(walletClient)
+    const signer = await ethersProvider.getSigner()
+    const mintContract = new ethers.Contract(config.mintContract.address, config.mintContract.abi, signer)
+    const tx = await mintContract.mintNFT({
+      value: ethers.parseEther(config.mintContract.mintPrice)
+    })
+    const receipt = await tx.wait()
+    updateStatus(`✅ Minted! TX: ${createExplorerLink(receipt.hash)}`, "success")
+    // Extract tokenId from Transfer event
+    const event = receipt.logs.map(log => {
+      try {
+        return mintContract.interface.parseLog(log)
+      } catch {
+        return null
+      }
+    }).find(e => e?.name === "Transfer")
+    const tokenId = event?.args?.tokenId || event?.args?.[2]
+    if (!tokenId) throw new Error("Mint event not found")
+    // Auto-wrap
+    const wrapContract = new ethers.Contract(config.wrapContract.address, config.wrapContract.abi, signer)
+    updateStatus("⏳ Wrapping NFT...")
+    await wrapContract.wrap(tokenId, config.wrapContract.defaultTokenURI)
+    updateStatus("✅ Wrapped NFT!", "success")
+  } catch (err) {
+    handleError(err)
+  } finally {
+    mintBtn.disabled = false
+  }
+}
 
-  // On page load, disable mint button
-  disableMintButton();
-});
+// Add mint button event
+mintBtn?.addEventListener('click', mintNFT)
+
+// On page load, show wallet address if connected
+(async () => {
+  const { getAccount } = await import('@wagmi/core')
+  const account = getAccount()
+  if (account?.address && walletAddressEl) {
+    walletAddressEl.textContent = `${account.address.slice(0, 6)}...${account.address.slice(-4)}`
+  }
+})()
