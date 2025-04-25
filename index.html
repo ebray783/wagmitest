@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.9" />
+  <title>FPVTOKEN Combined Page</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@web3modal/html@2.7.1/dist/bundle.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.7.1/dist/ethers.umd.min.js"></script> 
+  <!-- First page CSS -->
+  <link rel="stylesheet" href="home.css" />
+
+  <!-- Second page CSS -->
+  <link rel="stylesheet" href="gallery.css" />
+
+  <!-- Third page CSS -->
+  <link rel="stylesheet" href="part.css" />
+
+  <!-- Fourth page CSS -->
+  <link rel="stylesheet" href="explorer.css" />
+
+  <!-- Fifth page CSS -->
+  <link rel="stylesheet" href="mint.css" />
+
+  <!-- Sixth page CSS -->
+  <link rel="stylesheet" href="tokenomics.css" />
+
+  <!-- Seventh page CSS -->
+  <link rel="stylesheet" href="roadmap.css" />
+
+  <!-- Eighth page CSS -->
+  <link rel="stylesheet" href="whoweare.css" />
+
+  <!-- Ninth page CSS -->
+  <link rel="stylesheet" href="nft.css">
+
+
+<style>
+.smart-contract {
+  font-size: 2rem;
+  font-weight: 700;
+  font-family: 'Courier New', Courier, monospace;
+  color: #00f0ff;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 15px #00f0ff88;
+  word-break: break-all;
+  text-align: center;
+  margin-top: 1rem;
+}
+</style>
+
+
+  
+</head>
+
+<body>
+
+<!-- NFT Mint & Auto-Wrap Widget -->
+<div class="nft-widget">
+    <h2>NFT Mint & Auto-Wrap</h2>
+    <button id="connect-btn">Connect Wallet</button>
+    <button id="disconnect-btn" style="display:none;">Disconnect Wallet</button>
+    <button id="mint-btn" disabled>Mint NFT (0.01 BNB)</button>
+    <div id="nft-status" class="disconnected">🔴 Wallet Not Connected</div>
+</div>
+
+
+
+  
+
+<!-- Page 1: FPVTOKEN HOME -->
+<div class="topbar" id="topbar">
+    <div class="search-bar">
+      <input type="text" placeholder="Search...">
+    </div>
+    <div class="nav-buttons">
+      <button onclick="scrollToSection('top')">Home</button>
+      <button onclick="scrollToSection('gallery')">Gallery</button>
+      <button onclick="scrollToSection('mint-section')">Mint</button>
+      <button onclick="scrollToSection('contact')">Contact</button>
+    </div>
+</div>
+
+<div id="top"></div>
+<img id="logo" src="gallery/logo.jpg" alt="Logo" />
+<h1>FPVTOKEN</h1>
+<p class="description">
+    The first crypto token inspired by aliens Predator idea,<br />
+    Including real FPV drone parts & NFT collection
+</p>
+
+<div class="button-group">
+  <a href="https://pancakeswap.finance/swap?outputCurrency=YOUR_TOKEN_ADDRESS" target="_blank" rel="noopener">
+    <button>Buy</button>
+  </a>
+  <a href="https://pancakeswap.finance/swap?inputCurrency=YOUR_TOKEN_ADDRESS" target="_blank" rel="noopener">
+    <button>Sell</button>
+  </a>
+</div>
+
+<h2 class="section-title">About the Project</h2>
+<p class="description">
+    FPVTOKEN is the first crypto project merging FPV drone parts & NFTs.<br />
+    Inspired by alien Predator themes, our mission is dimming at technology and FPV facing, into one dimining, ecosystem.
+</p>
+
+<h2 id="gallery" class="section-title">GALLERY</h2>
+<div class="gallery">
+    <img src="gallery/img1.jpg" alt="">
+    <img src="gallery/img2.jpg" alt="">
+    <img src="gallery/img3.jpg" alt="">
+    <img src="gallery/img4.jpg" alt="">
+    <img src="gallery/img5.jpg" alt="">
+    <img src="gallery/img6.jpg" alt="">
+    <img src="gallery/img7.jpg" alt="">
+    <img src="gallery/img8.jpg" alt="">
+    <img src="gallery/mint5.jpg" alt="">
+    <img src="gallery/mint7.jpg" alt="">
+</div>
+
+<!-- Minting Section -->
+<div id="mint-section" class="section">
+  <h2 class="section-title">SMART CONTRACT</h2>
+  <p class="smart-contract">
+    0x1BEe8d11f11260A4E39627EDfCEB345aAfeb57d9
+  </p>
+</div>
+
+
+
+    <div id="web3-controls" style="margin-top: 30px; padding: 20px; background-color: #111; color: #0f0; border: 1px solid #0f0; border-radius: 8px;">
+        <h3>🧠 Smart Contract Controls</h3>
+        <hr style="margin: 15px 0; border-color: #0f0;">
+        <h4>🎁 Wrap Minted NFT</h4>
+        <input id="wrap-id" type="number" placeholder="Enter Token ID (e.g. 1)" style="margin-right: 10px;" />
+        <input id="wrap-uri" type="text" placeholder="Enter IPFS URI" size="50" />
+        <button onclick="wrapNFT()">Wrap NFT</button>
+    </div>
+</div>
+
+<!-- Page 2: HERE WE GO Section -->
+<header>HERE WE GO</header>
+<div class="main-wrapper">
+    <div class="side-column">
+        <img src="https://i.postimg.cc/2Skk7pdW/Chat-GPT-Image-Apr-13-2025-05-24-05-AM.png" alt="Left Image 1" style="height: 400px; width: 250px;" />
+    </div>
+
+    <section class="gallery">
+        <div class="gallery-item">
+            <img src="https://i.postimg.cc/FFyT5wc1/rcinpower-2207.jpg" alt="Motor" />
+            <h3>RCING 2207/2750KV</h3>
+            <p>Super power motor used for 4s/2750kv 6s/2200kv</p>
+        </div>
+        <div class="gallery-item">
+            <img src="https://i.postimg.cc/HsSDHGmT/img1.jpg" alt="Frame" />
+            <h3>SPEEDYBEE FRAME</h3>
+            <p>This frame gives you the best ability to control the drone</p>
+        </div>
+        <div class="gallery-item">
+            <img src="https://i.postimg.cc/59g8mJL5/luminier-props.jpg" alt="Drone" />
+            <h3>Drone FPV View</h3>
+            <p>Capture the horizon with high-end racing drones</p>
+        </div>
+        <div class="gallery-item">
+            <img src="https://i.postimg.cc/KvQQ4L02/aifc1.jpg" alt="Flight Controller" />
+            <h3>Speedybee HD Flight Controller</h3>
+            <p>Best flight controller for HD and analog drones</p>
+        </div>
+        <div class="gallery-item">
+            <img src="https://i.postimg.cc/ncdYnxLV/speedybee-esc.jpg" alt="ESC" />
+            <h3>Speedybee 60am ESC</h3>
+            <p>Speedybee 60am bethel 32 ESC</p>
+        </div>
+        <div class="gallery-item">
+            <img src="https://i.postimg.cc/tTtWwQfj/radio-fpv.jpg" alt="Pilot" />
+            <h3>Cyber radiomaster</h3>
+            <p>Next-gen FPV pilot with AR interface and goggles</p>
+        </div>
+        <div class="gallery-item">
+            <img src="https://i.postimg.cc/qM7ybFxP/img2.jpg" alt="Antenna" />
+            <h3>Crossfire Receiver</h3>
+            <p>Durable, high-gain for clear signal</p>
+        </div>
+        <div class="gallery-item">
+            <img src="https://i.postimg.cc/wBRkWrgq/wa.jpg" alt="Goggles" />
+            <h3>FPV Goggles HD</h3>
+            <p>High-definition goggles with low latency video feed</p>
+        </div>
+        <div class="gallery-item">
+            <img src="https://i.postimg.cc/kMvvhK3b/ai-air-unit.jpg" alt="Air Unit" />
+            <h3>FPV Camera</h3>
+            <p>Ultra-clear wide-angle FPV camera for fast flight</p>
+        </div>
+        <div class="gallery-item">
+            <img src="https://i.postimg.cc/YChN9P46/gnb-lipo.jpg" alt="Battery" />
+            <h3>LiPo Battery</h3>
+            <p>High-performance LiPo battery for longer flights</p>
+        </div>
+    </section>
+
+    <div class="side-column">
+        <img src="https://i.postimg.cc/L8t9z9Z2/output-2.png" alt="Right Image 2" style="height: 400px; width: 250px;" />
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<script>
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Topbar scroll effect
+    let lastScrollTop = 0;
+    const topbar = document.getElementById('topbar');
+
+    window.addEventListener('scroll', function () {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop > lastScrollTop) {
+        topbar.style.top = "-80px";  // hide topbar when scrolling down
+      } else {
+        topbar.style.top = "0";  // show topbar when scrolling up
+      }
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    });
+</script>
+
+
+
+<!-- FPV DRONE LIST SECTION START -->
+ <section class="fpv-parts-section" style="margin-top: 100px;">
+ 
+   <div class="container">
+     <div class="title">FPV DRONE LIST PART</div>
+     <div class="subtitle">THE COMPLETE LIST OF PART</div>
+     <ul>
+       <li>5INCH DRONE FRAME</li>
+       <li>4X MOTOR</li>
+       <li>AI FLIGHT CONTROLLER</li>
+       <li>BLHELI 32 ESC</li>
+       <li>AI AIR UNIT</li>
+       <li>RX RECEIVER</li>
+       <li>REMOTE CONTROLLER</li>
+       <li>AI FPV GOGGLES</li>
+       <li>PROPELLERS</li>
+     </ul>
+     <div class="highlight">
+       <a href="#">COMPLETE ALL DRONE PARTS AND EARN UP TO 100000 FPV TOKEN</a>
+     </div>
+   </div>
+ </section>
+ <!-- FPV DRONE LIST SECTION END -->
+ 
+ 
+ <!-- 🟣 EXPLORE SECTION START -->
+ <section class="explore-section" style="margin-top: 100px;">
+   <h1 class="explore-title">EXPLORE</h1>
+   <div class="carousel-container">
+     <div class="carousel-track">
+       <img src="explorer/drone1.png" alt="Drone 1">
+       <img src="explorer/drone2.png" alt="Drone 2">
+       <img src="explorer/drone3.png" alt="Drone 3">
+       <img src="explorer/drone4.png" alt="Drone 4">
+       <img src="explorer/drone5.png" alt="Drone 5">
+       <img src="explorer/drone6.png" alt="Drone 6">
+       <img src="explorer/drone7.png" alt="Drone 7">
+       <img src="explorer/drone8.png" alt="Drone 8">
+       <img src="explorer/drone9.png" alt="Drone 9">
+       <img src="explorer/drone10.png" alt="Drone 10">
+       <!-- Duplicate set for loop effect -->
+       <img src="explorer/drone1.png" alt="Drone 1 duplicate">
+       <img src="explorer/drone2.png" alt="Drone 2 duplicate">
+       <img src="explorer/drone3.png" alt="Drone 3 duplicate">
+       <img src="explorer/drone4.png" alt="Drone 4 duplicate">
+       <img src="explorer/drone5.png" alt="Drone 5 duplicate">
+       <img src="explorer/drone6.png" alt="Drone 6 duplicate">
+       <img src="explorer/drone7.png" alt="Drone 7 duplicate">
+       <img src="explorer/drone8.png" alt="Drone 8 duplicate">
+       <img src="explorer/drone9.png" alt="Drone 9 duplicate">
+       <img src="explorer/drone10.png" alt="Drone 10 duplicate">
+     </div>
+   </div>
+ 
+   <h2 class="brand-title">FEATURE BRANDS</h2>
+   <div class="brands">
+     <img src="explorer/walksnail.jpg" alt="Walksnail">
+     <img src="explorer/lumenier.jpg" alt="Lumenier">
+     <img src="explorer/iflight.jpg" alt="iFlight">
+     <img src="explorer/radiomaster.jpg" alt="RadioMaster">
+     <img src="explorer/rdq.jpg" alt="Speedybee">
+     <img src="explorer/emax.jpg" alt="EMAX">
+     <img src="explorer/gnb.jpg" alt="GNB">
+     <img src="explorer/dji.jpg" alt="DJI">
+   </div>
+ </section>
+ <!-- 🟣 EXPLORE SECTION END -->
+ 
+ <section id="mint" style="margin-top: 100px; margin-bottom: 100px;">
+   <h2 class="section-title">NFT MINTING SECTION</h2>
+   <div class="mint-section-columns">
+ 
+     <!-- First Row (1–24) -->
+     <div class="mint-scroll-col">
+       <div class="mint-item"><img src="mint/mint1.png" data-alt="mint/mint10b.png" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint2.jpg" data-alt="mint/mint12b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint3.jpg" data-alt="mint/mint11b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint4.jpg" data-alt="mint/mint9b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint5.jpg" data-alt="mint/mint8b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint6.jpg" data-alt="mint/mint2b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint7.jpg" data-alt="mint/mint6b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint8.jpg" data-alt="mint/mint18b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint9.jpg" data-alt="mint/mint19b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint10.png" data-alt="mint/mint16b.png" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint11.png" data-alt="mint/mint18b.png" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint12.jpg" data-alt="mint/mint24b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint13.jpg" data-alt="mint/mint3b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint14.jpg" data-alt="mint/mint4b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint15.jpg" data-alt="mint/mint5b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint16.jpg" data-alt="mint/mint6b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint17.jpg" data-alt="mint/mint7b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint18.jpg" data-alt="mint/mint8b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint19.jpg" data-alt="mint/mint15b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint20.jpg" data-alt="mint/mint22b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint21.jpg" data-alt="mint/mint1b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint22.jpg" data-alt="mint/mint6b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint23.jpg" data-alt="mint/mint2b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint24.jpg" data-alt="mint/mint23b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+     </div>
+ 
+     <!-- Second Row (25–47) -->
+     <div class="mint-scroll-col">
+       <div class="mint-item"><img src="mint/mint25.jpg" data-alt="mint/mint47b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint26.jpg" data-alt="mint/mint46b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint27.jpg" data-alt="mint/mint45b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint28.jpg" data-alt="mint/mint44b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint29.jpg" data-alt="mint/mint43b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint30.jpg" data-alt="mint/mint42b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint31.jpg" data-alt="mint/mint41b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint32.jpg" data-alt="mint/mint40b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint33.jpg" data-alt="mint/mint39b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint34.jpg" data-alt="mint/mint38b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint35.jpg" data-alt="mint/mint37b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint36.jpg" data-alt="mint/mint35b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint37.jpg" data-alt="mint/mint36b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint38.jpg" data-alt="mint/mint34b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint39.jpg" data-alt="mint/mint33b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint40.jpg" data-alt="mint/mint32b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint41.png" data-alt="mint/mint31b.png" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint42.jpg" data-alt="mint/mint30b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint43.jpg" data-alt="mint/mint29b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint44.jpg" data-alt="mint/mint28b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint45.jpg" data-alt="mint/mint27b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint46.jpg" data-alt="mint/mint25b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+       <div class="mint-item"><img src="mint/mint47.jpg" data-alt="mint/mint24b.jpg" onclick="toggleImage(this)"><br><button>Mint</button></div>
+     </div>
+ 
+   </div>
+ </section>
+ 
+ <!-- Image Toggle Script -->
+ <script>
+   function toggleImage(img) {
+     const current = img.src;
+     const alt = img.getAttribute("data-alt");
+     if (!alt) return;
+     img.setAttribute("data-alt", current);
+     img.src = alt;
+   }
+ </script>
+ 
+ 
+ <!-- Cyberpunk Tokenomics Section -->
+ <section class="cyber-tokenomics">
+   <h2>FPV TOKEN DISTRIBUTION</h2>
+   <p class="desc">Built on BSC — powering NFTs, rewards, listings, and more.</p>
+ 
+   <div class="token-grid">
+     <!-- Top Row -->
+     <div class="token-box neon-orange">10%<br><span>Community</span><br>Airdrops</div>
+     <div class="token-box neon-blue">10%<br><span>Team</span><br>Developers</div>
+     <div class="token-box neon-purple">10%<br><span>Liquidity</span><br>DEX/CEX</div>
+     <div class="token-box neon-green">10%<br><span>NFT Holders</span><br>Rewards</div>
+ 
+     <!-- Video Chart in Center -->
+     <div class="token-video">
+       <video class="token-chart-video" controls>
+         <source src="videos/token-chart.mp4" type="video/mp4" />
+         Your browser does not support the video tag.
+       </video>
+     </div>
+ 
+     <!-- Bottom Row -->
+     <div class="token-box neon-blue">Drone Store<br><span>Physical Parts</span></div>
+     <div class="token-box neon-purple">NFTs<br><span>Digital Assets</span></div>
+     <div class="token-box neon-orange">Exchange<br><span>Listings</span></div>
+     <div class="token-box neon-pink">50%<br><span>Locked</span><br>5 Years</div>
+   </div>
+ </section>
+ 
+ 
+ 
+   <section id="roadmap">
+   <h1>FPVTOKEN - 6 Step Roadmap</h1>
+ 
+   <div class="timeline">
+ 
+     <!-- 🔧 STEP 1 -->
+     <div class="step">
+       <h2>Q2 2025</h2>
+       <p> FPV Token and Building Ecosystem</p>
+     </div>
+ 
+     <!-- 🔧 STEP 2 -->
+     <div class="step">
+       <h2>Q3 2025</h2>
+       <p>Listing on DEX Platforms</p>
+     </div>
+ 
+     <!-- 🔧 STEP 3 -->
+     <div class="step">
+       <h2>Q4 2025</h2>
+       <p>NFT Minting + Rewards to Holders</p>
+     </div>
+ 
+     <!-- 🔧 STEP 4 -->
+     <div class="step">
+       <h2>Q1 2026</h2>
+       <p>Listing on Centralized Exchanges</p>
+     </div>
+ 
+     <!-- 🔧 STEP 5 -->
+     <div class="step">
+       <h2>Q2 2026</h2>
+       <p>Tier-1 Exchange Listings</p>
+     </div>
+ 
+     <!-- 🔧 STEP 6 -->
+     <div class="step">
+       <h2>Q4 2026</h2>
+       <p>Launch Metaverse FPV Product Line</p>
+     </div>
+ 
+     <!-- 🔧 STEP 7 -->
+     <div class="step">
+       <h2>Q1 2027</h2>
+       <p>FPV Simulating Game</p>
+     </div>
+ 
+   </div>
+ </section>
+ 
+ 
+ 
+   <section id="who-we-are">
+   <div class="container">
+     <h1>Who We Are</h1>
+     <p>
+       We are FPVTOKEN — a fusion of futuristic drone racing and decentralized blockchain technology.
+       Born from the underground circuits of cyberpunk cities, we connect real-world FPV drone hardware
+       with an exclusive NFT ecosystem.
+     </p>
+     <p>
+       FPVTOKEN is not just a token — it’s a movement. Our NFTs represent access, art, and utility
+       across the digital and physical world. Get ready to race into the future.
+     </p>
+ 
+     <div class="team-section">
+       <h2>Meet the Team</h2>  
+ 
+         <div class="founder">
+           <img src="whoweare/who2.png" alt="who2">
+           <h4>NeoPilot</h4>
+           <p>Founder & Lead Dev</p>
+         </div>
+ 
+         <div class="founder">
+           <img src="whoweare/3.png" alt="3">
+           <h4>DroneGhost</h4>
+           <p>Co-Founder & Smart Contracts</p>
+         </div>
+ 
+         <div class="founder">
+           <img src="whoweare/4.png" alt="4">
+           <h4>MetaQueen</h4>
+           <p>Creative Director</p>
+         </div>
+       </div>
+     </div>
+ 
+     <footer>
+       <div class="contact-links">
+         <a href="https://t.me/your_channel" target="_blank">🔹 Telegram</a>
+         <a href="https://twitter.com/your_handle" target="_blank">🔹 Twitter</a>
+         <a href="https://wa.me/your_number" target="_blank">🔹 WhatsApp</a>
+         <a href="mailto:ebray783@gmail.com">🔹 Email</a>
+       </div>
+     </footer>
+   </div>
+ </section>
+ 
+ 
+
+
+<script type="module" src="main.js"></script>
+</body>
+</html>
